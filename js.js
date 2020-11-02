@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import Breadcrumb from '../common/breadcrumb';
-import useForm from 'react-hook-form'
+import useForm from 'react-hook-form' // useForm should be destructured from the default export
 import {toast} from "react-toastify";
 import axios from "axios";
 import ImageUploader from "react-images-upload";
@@ -26,9 +26,11 @@ const FormValidation = () => {
             .then(response => {
                 const optionItems = response.data.jobMethods.map((jobMethod, index) =>
                     <option key={index.id} value={index.id}>{index.name}</option>
+                    // `index` is the index of the each item in the array. you should replace `index` with `jobMethod`.
                 );
 
                 setJobMethods(optionItems);
+                // No function named setJobMethods. Not defined such state.
             })
             .catch((error) => {
                 console.error(error);
@@ -53,7 +55,7 @@ const FormValidation = () => {
                 )
                 .then(response => {
                     console.log(response);
-                    if (response.status = 200) {
+                    if (response.status = 200) { // wrong conditional operator. Use (==) or(===) insted (=)
                         if (typeof response.data.error != 'undefined') {
                             if (typeof response.data.error.job_number != 'undefined') {
                                 setTimeout(() => {
@@ -89,6 +91,7 @@ const FormValidation = () => {
                             noValidate=""
                             id="create_job_form"
                         >
+                        <!-- Not driving submit. your should assign handleSubmit(onSubmit) into onSubmit prop -->
                             <div className="card">
                                 <div className="card-body">
                                     <div className="form-row">
@@ -265,6 +268,7 @@ const FormValidation = () => {
                                                 id="expected_shift_average"
                                                 name="expected_shift_average"
                                                 type="text" ref={register({ required: false })}
+                                                <!-- Missing `>` -->
                                         </div>
                                         <div className="col-md-2 mb-3">
                                             <label htmlFor="expected_ft_per_shift">Expected FT./Shift</label>
@@ -273,6 +277,7 @@ const FormValidation = () => {
                                                 id="expected_ft_per_shift"
                                                 name="expected_ft_per_shift"
                                                 type="text" ref={register({ required: false })}
+                                                <!-- Missing `>` -->
                                         </div>
                                         <div className="col-md-2 mb-3">
                                             <label htmlFor="expected_billed_percentage">Expected Billed %</label>
@@ -282,6 +287,7 @@ const FormValidation = () => {
                                                 name="expected_billed_percentage"
                                                 type="number"
                                                 ref={register({ required: false })}
+                                                <!-- Missing `>` -->
                                         </div>
                                         <div className="col-md-2 mb-3">
                                             <label htmlFor="expected_drilling_percentage">Expected Drilling %</label>
@@ -292,6 +298,7 @@ const FormValidation = () => {
                                                 type="number"
                                                 ref={register({ required: false })}
                                             />
+                                            <!-- Use `>` instead `/>` -->
                                         </div>
                                     </div>
                                 </div>
@@ -314,6 +321,7 @@ const FormValidation = () => {
                                 </div>
                             </div>
                         <button className="btn btn-primary" type="submit">Create</button>
+                        <!-- No closing tag for `form` -->
                     </div>
                 </div>
             </div>
